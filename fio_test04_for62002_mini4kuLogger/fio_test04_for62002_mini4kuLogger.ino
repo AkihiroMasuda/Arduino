@@ -90,7 +90,8 @@ int detectPitch(BYTE flg, BYTE *buf, BYTE curInd)
   BYTE tmp[5];
   //	const BYTE shikii = 0x20;
   //	const BYTE shikii = 146;
-  const BYTE shikii = 253;
+//  const BYTE shikii = 253;
+  const BYTE shikii = 150;
 
   buf[0] = getAnalogData();
   buf[1] = getAnalogData();
