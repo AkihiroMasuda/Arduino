@@ -1,7 +1,7 @@
-#define LEDPIN 13
+#define LEDPIN 13 //LEDが繋がってるピン番号を定義
 
 void setup() {
-  pinMode(LEDPIN, OUTPUT); //
+  pinMode(LEDPIN, OUTPUT); //指定ピンを出力モードに設定
 }
 
 void loop() {
