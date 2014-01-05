@@ -1,63 +1,45 @@
 #include <SoftwareSerial.h>
 
-//#define BLUETOOTH_RX_PIN	(7)
-//#define BLUETOOTH_TX_PIN	(12)
-#define BLUETOOTH_RX_PIN	(12)
-#define BLUETOOTH_TX_PIN	(11)
-SoftwareSerial mySerial(BLUETOOTH_RX_PIN,BLUETOOTH_TX_PIN);
+#define LED_PIN (13) //LEDピン番号定義
+#define RX_PIN  (12) //RXピン番号定義
+#define TX_PIN  (11) //TXピン番号定義
 
-int count = 0;
-char str[128];
-unsigned long nextTime;
-const unsigned long T = 1000;
+SoftwareSerial mySerial(RX_PIN,TX_PIN); //シリアルポート設定
+
+char str[128];           //送信用文字列バッファ
+unsigned long nextTime;  //次回送信時刻
+const unsigned long T = 1000; //送信間隔
 
 void setup()
 {
-
-//  Serial.begin(9600);
-  mySerial.begin(9600); //BlueTooth用のシリアルポート
+  //シリアルポート有効化。SBDBTのデフォルトのボーレート9600を設定
+  mySerial.begin(9600); 
   
-  count = 0;
+  // 次回送信時刻の更新
   nextTime = millis() + T;
 }
 
-boolean flg = false;
 void loop()
 {
-  //BlueToothポートへの書き込み
-//  sprintf(str, "XXX:%03d", count);
-
+  // 現在時刻(=プログラムの実行開始から現在までの時間)を取得
   unsigned long curTime = millis();
+
+  // 現在時刻が送信時刻を超えていたらデータ送信
   if (curTime > nextTime){
-    nextTime = curTime + T;
     
-    sprintf(str, "ABCDEFGHIJKLMN");
-    mySerial.println("ABCDEFGHIJKLMN");
-    count++;
+    // 送信用文字列を作成
+    sprintf(str,"millis:%ld",curTime);
+
+    // シリアルポートへ文字列送信
+    mySerial.println(str);
     
-    ledLoop();
+    // スケッチ書き込み確認用にLED点滅
+    digitalWrite(13,HIGH);
+    delay(100);
+    digitalWrite(13,LOW);
+    
+    // 次回送信時刻を更新
+    nextTime += T;
   }
-
-
-  //標準シリアルポートにデータ書き込まれたら、それをBlueToothの方へ転送する。
-//  if (Serial.available()){
-//    mySerial.write(Serial.read());
-//  }
-  
-  // BlueToothポートに書き込まれたら標準シリアルポートに転送。
-  // 2012/09/04 現在では失敗。
-//  if (mySerial.available()){
-//    Serial.println("hogehoge");
-//    mySerial.println("read:");
-//    mySerial.println(mySerial.read()); //リードしないとバッファに溜まったままなので注意
-//  }
-//  Serial.println("xx");
-  
 }
 
-void ledLoop(){
-  digitalWrite(13,HIGH);
-  delay(200);
-  digitalWrite(13,LOW);
-  delay(200);
-}  
