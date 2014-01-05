@@ -17,6 +17,12 @@ void setup()
   
   // 次回送信時刻の更新
   nextTime = millis() + T;
+
+  // ピンモードの設定
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(RX_PIN, INPUT);
+  pinMode(TX_PIN, OUTPUT);
+  
 }
 
 void loop()
