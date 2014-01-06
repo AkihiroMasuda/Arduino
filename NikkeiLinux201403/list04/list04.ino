@@ -121,7 +121,6 @@ long calcRotationPeriod()
   }
   // LOW→HIGHになった時刻を保存
   unsigned long t1 = micros();
-  micros();
 
   // もう一度LOW→HIGHになるまで待つ
   if (waitLowToHigh() == false){
