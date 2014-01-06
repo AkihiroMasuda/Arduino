@@ -75,13 +75,13 @@ boolean waitLowToHigh()
 {
   const int thresholdHIGH = 120; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
   const int thresholdLOW = 60; //LOWを判断する閾値。アナログ入力値がこの値以上になったらLOWと判断
-  const unsigned long timeOverDuration = 3000; //タイムオーバー間隔[ms]。この時間内にHIGH/LOW切替がなければエラーとみなす
+  const unsigned long timeOverDuration = 3000000; //タイムオーバー間隔[μs]。この時間内にHIGH/LOW切替がなければエラーとみなす
 
   // １．LOWになるまで待つ
-  unsigned long timeOver = millis() + timeOverDuration; //タイムオーバー時刻
+  unsigned long timeOver = micros() + timeOverDuration; //タイムオーバー時刻
   while(true){
     // タイムオーバーチェック
-    if (millis() > timeOver){
+    if (micros() > timeOver){
       // タイムオーバー発生
       return false;
     }
@@ -93,10 +93,10 @@ boolean waitLowToHigh()
   }
 
   // ２．HIGHになるまで待つ
-  timeOver = millis() + timeOverDuration; //タイムオーバー時刻更新
+  timeOver = micros() + timeOverDuration; //タイムオーバー時刻更新
   while(true){
     // タイムオーバーチェック
-    if (millis() > timeOver){
+    if (micros() > timeOver){
       // タイムオーバー発生
       return false;
     }
