@@ -9,7 +9,7 @@ SoftwareSerial mySerial(RX_PIN,TX_PIN); //シリアルポート設定
 
 char str[128];           //送信用文字列バッファ
 unsigned long nextTime;  //次回送信時刻
-const unsigned long T = 1000; //送信間隔
+const unsigned long T = 1000; //送信間隔[ms]
 
 void setup()
 {
@@ -43,12 +43,12 @@ void loop()
       // ホイール一回転で進む距離を回転時間で割って求める
       // ホイール一回転で進む距離はタイヤの円周と等しいとする
       const double diameter = 30; // タイヤの直径[mm]
-      double velocity = diameter*PI/double(period)*3.6; // 速度 [km/h]. 3.6は[mm/ms]->[km/h]変換の係数
+      double velocity = diameter*PI/double(period)*3600; // 速度 [km/h]. 3600は[mm/μs]->[km/h]変換の係数
 
       // 送信用文字列を作成
       char strVel[6]; // 速度の文字列格納用
       dtostrf(velocity,5,2,strVel); //arduinoのsprintfは浮動小数点を文字列にする%fが使えない。代わりにdtostrfを使う。
-      sprintf(str,"millis:%ld period:%ld[ms] velocity:%s[km/h]",curTime, period, strVel);
+      sprintf(str,"millis:%ld period:%ld[μs] velocity:%s[km/h]",curTime, period, strVel);
     }else{
       // 失敗
       // 送信用文字列を作成
@@ -111,7 +111,7 @@ boolean waitLowToHigh()
 }
 
 // ホイールが１回転する時間を求める。
-// 正しく求められた時はその値[ms]を返す。
+// 正しく求められた時はその値[μs]を返す。
 // タイムオーバーなどで失敗した時は-1を返す。
 long calcRotationPeriod()
 {
@@ -120,14 +120,15 @@ long calcRotationPeriod()
     return -1;
   }
   // LOW→HIGHになった時刻を保存
-  unsigned long t1 = millis();
+  unsigned long t1 = micros();
+  micros();
 
   // もう一度LOW→HIGHになるまで待つ
   if (waitLowToHigh() == false){
     return -1;
   }
   // LOW→HIGHになった時刻を保存
-  unsigned long t2 = millis();
+  unsigned long t2 = micros();
 
   // 時刻t1, t2の差分が１回転した時間
   return t2 - t1;
