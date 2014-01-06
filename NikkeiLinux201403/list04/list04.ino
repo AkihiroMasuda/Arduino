@@ -1,9 +1,9 @@
 #include <SoftwareSerial.h>
 
 #define LED_PIN (13) //LEDピン番号定義
-#define RX_PIN  (12) //RXピン番号定義
-#define TX_PIN  (11) //TXピン番号定義
-#define AIN_PIN (7)  //センサ入力ピン番号定義
+#define RX_PIN  (3) //RXピン番号定義
+#define TX_PIN  (2) //TXピン番号定義
+#define AIN_PIN (0)  //センサ入力ピン番号定義
 
 SoftwareSerial mySerial(RX_PIN,TX_PIN); //シリアルポート設定
 
@@ -73,8 +73,8 @@ void loop()
 // 成功すればtrueを返す。タイムオーバーで失敗すればfalseを返す。
 boolean waitLowToHigh()
 {
-  const int thresholdHIGH = 120; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
-  const int thresholdLOW = 60; //LOWを判断する閾値。アナログ入力値がこの値以上になったらLOWと判断
+  const int thresholdHIGH = 200; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
+  const int thresholdLOW = 100; //LOWを判断する閾値。アナログ入力値がこの値以下になったらLOWと判断
   const unsigned long timeOverDuration = 3000000; //タイムオーバー間隔[μs]。この時間内にHIGH/LOW切替がなければエラーとみなす
 
   // １．LOWになるまで待つ

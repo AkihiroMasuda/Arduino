@@ -1,9 +1,9 @@
 #include <SoftwareSerial.h>
 
 #define LED_PIN (13) //LEDピン番号定義
-#define RX_PIN  (12) //RXピン番号定義
-#define TX_PIN  (11) //TXピン番号定義
-#define AIN_PIN (7)  //センサ入力ピン番号定義
+#define RX_PIN  (3) //RXピン番号定義
+#define TX_PIN  (2) //TXピン番号定義
+#define AIN_PIN (0)  //センサ入力ピン番号定義
 
 SoftwareSerial mySerial(RX_PIN,TX_PIN); //シリアルポート設定
 
