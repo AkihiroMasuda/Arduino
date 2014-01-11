@@ -5,6 +5,7 @@
 #define TX_PIN  (2) //TXピン番号定義
 #define AIN_PIN (0)  //センサ入力ピン番号定義
 
+
 SoftwareSerial mySerial(RX_PIN,TX_PIN); //シリアルポート設定
 
 char str[128];           //送信用文字列バッファ
@@ -23,7 +24,6 @@ void setup()
   pinMode(LED_PIN, OUTPUT);
   pinMode(RX_PIN, INPUT);
   pinMode(TX_PIN, OUTPUT);
-  pinMode(AIN_PIN, INPUT);
 
 }
 
@@ -59,9 +59,9 @@ void loop()
     mySerial.println(str);
 
     // スケッチ書き込み確認用にLED点滅
-    digitalWrite(13,HIGH);
+    digitalWrite(LED_PIN,HIGH);
     delay(100);
-    digitalWrite(13,LOW);
+    digitalWrite(LED_PIN,LOW);
 
     // 次回送信時刻を更新
     nextTime += T;
@@ -73,8 +73,10 @@ void loop()
 // 成功すればtrueを返す。タイムオーバーで失敗すればfalseを返す。
 boolean waitLowToHigh()
 {
-  const int thresholdHIGH = 200; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
-  const int thresholdLOW = 100; //LOWを判断する閾値。アナログ入力値がこの値以下になったらLOWと判断
+//  const int thresholdHIGH = 200; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
+//  const int thresholdLOW = 100; //LOWを判断する閾値。アナログ入力値がこの値以下になったらLOWと判断
+  const int thresholdHIGH = 80; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
+  const int thresholdLOW = 70; //LOWを判断する閾値。アナログ入力値がこの値以下になったらLOWと判断
   const unsigned long timeOverDuration = 3000000; //タイムオーバー間隔[μs]。この時間内にHIGH/LOW切替がなければエラーとみなす
 
   // １．LOWになるまで待つ
