@@ -73,10 +73,8 @@ void loop()
 // 成功すればtrueを返す。タイムオーバーで失敗すればfalseを返す。
 boolean waitLowToHigh()
 {
-//  const int thresholdHIGH = 200; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
-//  const int thresholdLOW = 100; //LOWを判断する閾値。アナログ入力値がこの値以下になったらLOWと判断
-  const int thresholdHIGH = 80; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
-  const int thresholdLOW = 70; //LOWを判断する閾値。アナログ入力値がこの値以下になったらLOWと判断
+  const int thresholdHIGH = 200; //HIGHを判断する閾値。アナログ入力値がこの値以上になったらHIGHと判断
+  const int thresholdLOW = 100; //LOWを判断する閾値。アナログ入力値がこの値以下になったらLOWと判断
   const unsigned long timeOverDuration = 3000000; //タイムオーバー間隔[μs]。この時間内にHIGH/LOW切替がなければエラーとみなす
 
   // １．LOWになるまで待つ
