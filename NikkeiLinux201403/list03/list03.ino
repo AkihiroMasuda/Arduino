@@ -23,7 +23,6 @@ void setup()
   pinMode(LED_PIN, OUTPUT);
   pinMode(RX_PIN, INPUT);
   pinMode(TX_PIN, OUTPUT);
-  pinMode(AIN_PIN, INPUT);
   
 }
 
@@ -45,9 +44,9 @@ void loop()
     mySerial.println(str);
     
     // スケッチ書き込み確認用にLED点滅
-    digitalWrite(13,HIGH);
+    digitalWrite(LED_PIN,HIGH);
     delay(100);
-    digitalWrite(13,LOW);
+    digitalWrite(LED_PIN,LOW);
     
     // 次回送信時刻を更新
     nextTime += T;
