@@ -69,6 +69,30 @@ void loop()
   }
 }
 
+// ホイールが１回転する時間を求める。
+// 正しく求められた時はその値[μs]を返す。
+// タイムオーバーなどで失敗した時は-1を返す。
+long calcRotationPeriod()
+{
+  // LOW→HIGHになるまで待つ
+  if (waitLowToHigh() == false){
+    return -1;
+  }
+  // LOW→HIGHになった時刻を保存
+  unsigned long t1 = micros();
+
+  // もう一度LOW→HIGHになるまで待つ
+  if (waitLowToHigh() == false){
+    return -1;
+  }
+  // LOW→HIGHになった時刻を保存
+  unsigned long t2 = micros();
+
+  // 時刻t1, t2の差分が１回転した時間
+  return t2 - t1;
+}
+
+
 // アナログ入力値がLOW→HIGHに切り替わるまで待つ
 // 成功すればtrueを返す。タイムオーバーで失敗すればfalseを返す。
 boolean waitLowToHigh()
@@ -110,26 +134,4 @@ boolean waitLowToHigh()
   return true;
 }
 
-// ホイールが１回転する時間を求める。
-// 正しく求められた時はその値[μs]を返す。
-// タイムオーバーなどで失敗した時は-1を返す。
-long calcRotationPeriod()
-{
-  // LOW→HIGHになるまで待つ
-  if (waitLowToHigh() == false){
-    return -1;
-  }
-  // LOW→HIGHになった時刻を保存
-  unsigned long t1 = micros();
-
-  // もう一度LOW→HIGHになるまで待つ
-  if (waitLowToHigh() == false){
-    return -1;
-  }
-  // LOW→HIGHになった時刻を保存
-  unsigned long t2 = micros();
-
-  // 時刻t1, t2の差分が１回転した時間
-  return t2 - t1;
-}
 
