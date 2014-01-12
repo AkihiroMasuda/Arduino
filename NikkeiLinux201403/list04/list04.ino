@@ -37,7 +37,7 @@ void loop()
 
     // ホイールの回転時間[ms]を求める
     long period = calcRotationPeriod();
-    if (period > 0){
+    if (period >= 0){
       // 成功
       // 速度を算出
       // ホイール一回転で進む距離を回転時間で割って求める
