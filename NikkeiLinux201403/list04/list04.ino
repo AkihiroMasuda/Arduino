@@ -86,8 +86,8 @@ boolean waitLowToHigh()
       return false;
     }
     // アナログ入力値を見て閾値以下か確認
-    if (analogRead(AIN_PIN) < thresholdLOW){
-      // 十分にLOWになったとみなして抜ける
+    if (analogRead(AIN_PIN) <= thresholdLOW){
+      // 十分にLOWになったとみなしてループを抜ける
       break;
     }
   }
@@ -101,8 +101,8 @@ boolean waitLowToHigh()
       return false;
     }
     // アナログ入力値を見て閾値以上か確認
-    if (analogRead(AIN_PIN) > thresholdHIGH){
-      // 十分にHIGHになったとみなし、時刻を保存
+    if (analogRead(AIN_PIN) >= thresholdHIGH){
+      // 十分にHIGHになったとみなしてループを抜ける
       break;
     }
   }
