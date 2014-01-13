@@ -6,8 +6,8 @@ void setup() {
 
 void loop() {
   digitalWrite(LED_PIN, HIGH);   // LEDをON
-  delay(1000);              // 1000秒待つ
+  delay(1000);              // 1秒待つ
   digitalWrite(LED_PIN, LOW);    // LEDをOFF
-  delay(1000);              // 1000秒待つ
+  delay(1000);              // 1秒待つ
 }
 
