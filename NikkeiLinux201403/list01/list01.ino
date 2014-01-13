@@ -1,3 +1,6 @@
+/**
+ * Arduino Fio 内蔵LED(D13ピン接続）を点滅させる
+ */
 #define LED_PIN (13) //LEDが繋がってるピン番号を定義
 
 void setup() {

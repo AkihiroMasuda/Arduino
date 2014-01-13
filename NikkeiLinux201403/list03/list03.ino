@@ -1,3 +1,6 @@
+/**
+ * アナログ入力ピンA0で読み取った値をシリアルポートに送信する
+ */
 #include <SoftwareSerial.h>
 
 #define LED_PIN (13) //LEDピン番号定義

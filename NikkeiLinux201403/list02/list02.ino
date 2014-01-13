@@ -1,3 +1,6 @@
+/**
+ * シリアルポートに文字列を送信する
+ */
 #include <SoftwareSerial.h>
 
 #define LED_PIN (13) //LEDピン番号定義

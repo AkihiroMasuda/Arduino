@@ -1,3 +1,7 @@
+/**
+ * ミニ四駆のホイール回転時間を計測して速度を求め
+ * シリアルポートに結果を送信する
+ */
 #include <SoftwareSerial.h>
 
 #define LED_PIN (13) //LEDピン番号定義
