@@ -23,9 +23,6 @@ void setup()
 
   // ピンモードの設定
   pinMode(LED_PIN, OUTPUT);
-  pinMode(RX_PIN, INPUT);
-  pinMode(TX_PIN, OUTPUT);
-  
 }
 
 void loop()
@@ -35,6 +32,9 @@ void loop()
 
   // 現在時刻が送信時刻を超えていたらデータ送信
   if (curTime > nextTime){
+
+    // 次回送信時刻を更新
+    nextTime += T;
     
     // 送信用文字列を作成
     sprintf(str,"millis:%ld",curTime);
@@ -46,9 +46,6 @@ void loop()
     digitalWrite(13,HIGH);
     delay(100);
     digitalWrite(13,LOW);
-    
-    // 次回送信時刻を更新
-    nextTime += T;
   }
 }
 

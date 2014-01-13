@@ -24,9 +24,6 @@ void setup()
   
   // ピンモードの設定
   pinMode(LED_PIN, OUTPUT);
-  pinMode(RX_PIN, INPUT);
-  pinMode(TX_PIN, OUTPUT);
-  
 }
 
 void loop()
@@ -36,7 +33,10 @@ void loop()
 
   // 現在時刻が送信時刻を超えていたらデータ送信
   if (curTime > nextTime){
-    
+
+    // 次回送信時刻を更新
+    nextTime += T;
+
     // アナログ入力ピンの値を読み込む
     int analogInput = analogRead(AIN_PIN);
     
@@ -50,9 +50,6 @@ void loop()
     digitalWrite(LED_PIN,HIGH);
     delay(100);
     digitalWrite(LED_PIN,LOW);
-    
-    // 次回送信時刻を更新
-    nextTime += T;
   }
 }
 
